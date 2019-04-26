@@ -12,7 +12,7 @@ class AvailableController {
         date: {
           [Op.between]: [
             date.startOf('day').format(),
-            date.endOf('Day').format()
+            date.endOf('day').format()
           ]
         }
       }
@@ -32,6 +32,7 @@ class AvailableController {
       '18:00'
     ]
 
+    console.log(appointments)
     const available = schedule.map(time => {
       const [hour, minute] = time.split(':')
       const value = date
@@ -41,7 +42,7 @@ class AvailableController {
 
       return {
         time,
-        value: value.format,
+        value: value.format(),
         available:
           value.isAfter(moment()) &&
           !appointments.find(a => moment(a.date).format('HH:mm') === time)
